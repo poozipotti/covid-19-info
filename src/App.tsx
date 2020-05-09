@@ -1,25 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
+import {ThemeProvider} from 'styled-components';
+import {Header} from './components/Header';
 import './App.css';
-
+import {Symptoms} from './components/Symptoms';
+import {PreventiveMeasures} from './components/PrevenativeMeasures';
+const theme = {
+  primaryOne: '#ED7614',
+  primaryOneMedium: '#FF9E10',
+  primaryOneLight: '#FFF2D6',
+  primaryTwo: '#7D57C9',
+  primaryTwoLight: '#D6D1F2',
+  background: 'white',
+  foreground: '#252849',
+  foregroundLight: '#6A6D89',
+};
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div
+        style={{
+          background: theme.background,
+          fontFamily: "font-family: 'Roboto', sans-serif",
+        }}>
+        <Header />
+        <Symptoms />
+        <PreventiveMeasures />
+      </div>
+    </ThemeProvider>
   );
 }
 
