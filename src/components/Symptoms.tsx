@@ -21,7 +21,6 @@ export const Symptoms: React.FC = () => {
       <Title>Symptoms</Title>
       <div
         style={{
-          width: '80%;',
           display: 'flex',
           flexWrap:'nowrap',
           justifyContent:'flex-start',
