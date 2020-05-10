@@ -1,0 +1,64 @@
+import React, {ReactNode} from 'react';
+import styled from 'styled-components';
+import coughSmall from '../assets/Cough-Small.svg';
+import womanMask from '../assets/Woman-Mask.svg';
+import closePeople from '../assets/close.svg';
+import farPeople from '../assets/far.svg';
+import close from '../assets/close.svg';
+import far from '../assets/far.svg';
+import {
+  PreventiveMeasureCard,
+  PreventiveMeasureCardProps,
+} from './PrevenativeMeasureCard';
+
+const PreventiveMeasuresStyled = styled.div`
+  background-color: ${props => props.theme.primaryTwoLight};
+  margin: 0;
+`;
+const Title = styled.h2`
+  color: ${props => props.theme.primaryTwo};
+  padding-left: 3rem;
+  font-weight: 500;
+  padding-top: 20px;
+  margin: 0;
+`;
+
+const Cards:(PreventiveMeasureCardProps & {content:ReactNode})[] = [
+  {
+    iconLeft:coughSmall,
+    iconRight:womanMask,
+    title:'Wear Face Mask',
+    subtitle:'Stop The Spread',
+    content:<p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </p>
+  },
+  {
+    iconLeft:coughSmall,
+    iconRight:womanMask,
+    title:'Wash Your Hands',
+    subtitle:'and clean surfaces',
+    content:<p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </p>
+  },
+  {
+    iconLeft:closePeople,
+    iconRight:farPeople,
+    title:'Socially Distance',
+    subtitle:'6ft at all times!',
+    content:<p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </p>
+  },
+
+]
+
+export const PreventiveMeasures: React.FC = () => (
+  <PreventiveMeasuresStyled>
+    <Title> Covid-19 Measures </Title>
+      <div style={{height:`${120 * Cards.length}px`,overflow:'hidden'}}>
+        {Cards.map((preventiveCard) => <PreventiveMeasureCard {...preventiveCard} >{preventiveCard.content}</PreventiveMeasureCard> )}
+      </div>
+  </PreventiveMeasuresStyled>
+);

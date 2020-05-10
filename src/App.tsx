@@ -14,12 +14,15 @@ const theme = {
   foreground: '#252849',
   foregroundLight: '#6A6D89',
 };
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <div
         style={{
-          background: theme.background,
+          background: theme.primaryTwoLight,
+          overflowY:'hidden',
+          width:'100vw',
           fontFamily: "font-family: 'Roboto', sans-serif",
         }}>
         <Header />

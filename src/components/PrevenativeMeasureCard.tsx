@@ -1,10 +1,9 @@
-import React, {useContext} from 'react';
+import React, {ReactNode,useContext} from 'react';
 import styled from 'styled-components';
-import coughSmall from '../assets/Cough-Small.svg';
-import womanMask from '../assets/Woman-Mask.svg';
 import triangle from '../assets/triangle.svg';
 import {ThemeContext} from 'styled-components';
 import {useState} from 'react';
+import { PReventionCardProps } from '../types';
 
 const MiddleContainer = styled.div`
   display: Grid;
@@ -41,72 +40,100 @@ const Card = styled.div`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   margin: 20px;
   margin-bottom: 20px;
-  transition-timing-function: ease-out;
-  transform-origin: top;
-  transition: height 1s;
-
-  ${({dirty, active}: {dirty: boolean, active: boolean}) =>
-    dirty
+  overflow: hidden;
+  max-height: 60px;
+  ${({active}: {active: boolean}) =>
+    active
       ? `
-			height: ${active ? ' 300px' : 'auto'};
-    `
+				max-height: 300px;
+			`
       : ''}
 `;
 const Icon = styled.img`
+  align-self:center;
   width: 45px;
 `;
+const animationDuration =  '0.2s'
 const ActiveArrow = styled.img`
   grid-area: 2 / 2 / span 1 / span 1;
   justify-self: end;
-  transition-duration: 0.5s;
+  transition-duration: ${animationDuration};
   transition-property: transform;
   ${({dirty, active}: {dirty: boolean, active: boolean}) =>
     dirty ? `transform: rotate(${active ? 90 : 0}deg);` : ''}
 `;
+const Content = styled.div`
+  visibility: hidden;
+  opacity: 0;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  padding-bottom: 100px;
+  transform: scaleY(0) translateY(-5em);
+  transition-duration: ${animationDuration};
+  transition-property: opacity, transform;
+  transition-timing-function: ease-out;
+  transform-origin: top;
+  ${({active}: {active: boolean}) =>
+    active
+      ? `			
+			opacity:1;
+			visibility: visible;
+			transform:scaleY(1)
+		`
+      : ''}
+`;
 
-export const PreventiveMeasureCard: React.FC = () => {
+export interface PreventiveMeasureCardProps {
+	iconLeft: string,
+	iconRight: string,
+	title: string,
+	subtitle: string,
+
+}
+
+export const PreventiveMeasureCard: React.FC<PreventiveMeasureCardProps> = (props) => {
+  const {iconLeft,iconRight,title,subtitle} = props;
   const [dirty, setDirty] = useState(false);
   const [active, setActive] = useState(false);
   const theme = useContext(ThemeContext);
   return (
-      <Card
-        active={active}
-        dirty={dirty}
+    <Card active={active}>
+      <Icon src={iconLeft} />
+      <MiddleContainer
         onClick={() => {
           setActive(!active);
           !dirty && setDirty(true);
         }}>
-        <Icon src={coughSmall} />
-        <MiddleContainer>
-          <Title>Wear Face Mask</Title>
-          <div
-            style={{
-              width: '90%',
-              height: '4px',
-              backgroundColor: theme.primaryTwo,
-              gridArea: '2 / 1 /span 1/ span 2',
-            }}
-          />
-          <ActiveArrow
-            active={active}
-            dirty={dirty}
-            src={triangle}
-            className="more-arrow"
-          />
-          <Subtitle>Stop The Spread</Subtitle>
-        </MiddleContainer>
-        <Icon src={womanMask} />
-        {active && (
-          <p style={{gridColumn: 'span 3'}}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa.
-          </p>
-        )}
-      </Card>
+        <Title>{title}</Title>
+        <div
+          style={{
+            width: '90%',
+            height: '4px',
+            backgroundColor: theme.primaryTwo,
+            gridArea: '2 / 1 /span 1/ span 2',
+          }}
+        />
+        <ActiveArrow
+          active={active}
+          dirty={dirty}
+          src={triangle}
+          className="more-arrow"
+        />
+        <Subtitle>{subtitle}</Subtitle>
+      </MiddleContainer>
+      <Icon src={iconRight} />
+      {
+        <div
+          style={{
+            overflowY: active ? 'scroll' : 'hidden',
+            height: '300px',
+            gridColumn: 'span 3',
+          }}>
+          <Content active={active}>
+            {props.children}
+          </Content>
+        </div>
+      }
+    </Card>
   );
 };
