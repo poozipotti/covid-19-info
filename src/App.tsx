@@ -4,6 +4,7 @@ import {Header} from './components/Header';
 import './App.css';
 import {Symptoms} from './components/Symptoms';
 import {PreventiveMeasures} from './components/PrevenativeMeasures';
+import {Footer} from './components/Footer'
 const theme = {
   primaryOne: '#ED7614',
   primaryOneMedium: '#FF9E10',
@@ -21,13 +22,14 @@ function App() {
       <div
         style={{
           background: theme.primaryTwoLight,
-          overflowY:'hidden',
-          width:'100vw',
+          overflowY: 'hidden',
+          width: '100vw',
           fontFamily: "font-family: 'Roboto', sans-serif",
         }}>
         <Header />
         <Symptoms />
         <PreventiveMeasures />
+        <Footer />
       </div>
     </ThemeProvider>
   );
