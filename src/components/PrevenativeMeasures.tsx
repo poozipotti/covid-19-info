@@ -28,7 +28,14 @@ const Question = styled.p`
 `;
 const Answer = styled.p``;
 const StyledLi = styled.li`
-    padding-bottom: 1rem;
+  padding-bottom: 1rem;
+`;
+const CardContainer = styled.div`
+  @media (min-width: 700px){
+    width:700px;
+    margin-left:auto;
+    margin-right:auto;
+  }
 `;
 const Cards: (PreventiveMeasureCardProps & {content: ReactNode})[] = [
   {
@@ -102,16 +109,20 @@ const Cards: (PreventiveMeasureCardProps & {content: ReactNode})[] = [
     subtitle: '6ft at all times!',
     content: (
       <>
-      <p>
-        Social distancing, also called “physical distancing,” means keeping
-        space between yourself and other people outside of your home. To
-        practice social or physical distancing:
-      </p>
-      <ul>
-        <StyledLi>Stay at least 6 feet (about 2 arms’ length) from other people</StyledLi>
-        <StyledLi>Do not gather in groups</StyledLi>
-          <StyledLi>Stay out of crowded places and avoid mass gatherings)</StyledLi>
-      </ul>
+        <p>
+          Social distancing, also called “physical distancing,” means keeping
+          space between yourself and other people outside of your home. To
+          practice social or physical distancing:
+        </p>
+        <ul>
+          <StyledLi>
+            Stay at least 6 feet (about 2 arms’ length) from other people
+          </StyledLi>
+          <StyledLi>Do not gather in groups</StyledLi>
+          <StyledLi>
+            Stay out of crowded places and avoid mass gatherings)
+          </StyledLi>
+        </ul>
       </>
     ),
   },
@@ -120,10 +131,12 @@ const Cards: (PreventiveMeasureCardProps & {content: ReactNode})[] = [
 export const PreventiveMeasures: React.FC = () => (
   <PreventiveMeasuresStyled>
     <Title> Covid-19 Measures </Title>
-    {Cards.map(preventiveCard => (
-      <PreventiveMeasureCard {...preventiveCard}>
-        {preventiveCard.content}
-      </PreventiveMeasureCard>
-    ))}
+    <CardContainer>
+      {Cards.map(preventiveCard => (
+        <PreventiveMeasureCard {...preventiveCard}>
+          {preventiveCard.content}
+        </PreventiveMeasureCard>
+      ))}
+    </CardContainer>
   </PreventiveMeasuresStyled>
 );
