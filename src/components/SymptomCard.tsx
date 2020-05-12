@@ -57,7 +57,7 @@ export const SymptomCard: React.FC<SymptomCardProps> = props => {
   const {icon, title, subtitle, isEmegency} = props;
 
   return (
-    <div style={{paddingBottom: '50px', paddingTop: '20px'}}>
+    <div>
       <Card important={isEmegency}>
         <Title>{title}</Title>
         <Subtitle>{subtitle}</Subtitle>

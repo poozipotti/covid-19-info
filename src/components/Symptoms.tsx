@@ -16,11 +16,15 @@ const Title = styled.h2`
 const Disclaimer = styled.h3`
   color: ${props => props.theme.primaryOne};
   padding-left: 3rem;
+  width:80%;
   font-size: 1rem;
   font-weight: 500;
   padding-top: 20px;
   margin: 0;
 `;
+const StyledSection = styled(Section)`
+  padding-bottom: 40px;
+`
 const SymptomsList: SymptomCardProps[] = [
   {
     icon: coughSmall,
@@ -81,9 +85,10 @@ const SymptomsList: SymptomCardProps[] = [
 export const Symptoms: React.FC = () => {
   const theme = useContext(ThemeContext);
   return (
-    <Section
+    <StyledSection
       mainColor={theme.primaryOneLight}
-      secondaryColor={theme.primaryTwoLight}>
+      secondaryColor={theme.primaryTwoLight}
+    >
       <Title>Symptoms</Title>
       <Disclaimer>
         *This list is not all possible symptoms. Please call your medical
@@ -100,6 +105,6 @@ export const Symptoms: React.FC = () => {
           <SymptomCard {...symptom} />
         ))}
       </div>
-    </Section>
+    </StyledSection>
   );
 };
